@@ -1,6 +1,6 @@
 {
-  "name": "israelmedina-website",
-  "version": "0.0.1",
+  "name": "website",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -13,13 +13,5 @@
     "express": "~4.14.0",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
-  },
-  "main": "app.js",
-  "repository": {
-    "type": "git",
-    "url": "ssh://58b825127628e148d7000043@website-israelmedina.rhcloud.com/~/git/website.git/"
-  },
-  "author": "Israel Medina",
-  "license": "ISC",
-  "description": ""
+  }
 }
