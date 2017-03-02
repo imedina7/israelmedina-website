@@ -1,12 +1,25 @@
 {
-  "name": "openshift-cartridge-nodejs-template",
-  "version": "1.0.1",
-  "description": "Custom Node.js cartridge for OpenShift - sample application",
+  "name": "israelmedina-website",
+  "version": "0.0.1",
   "private": true,
-  "main": "start.js",
   "scripts": {
-    "start": "node --use_strict start.js"
+    "start": "node ./bin/www"
   },
-  "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
-  "license": "ISC"
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "~2.5.2",
+    "express": "~4.14.0",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "ssh://58b825127628e148d7000043@website-israelmedina.rhcloud.com/~/git/website.git/"
+  },
+  "author": "Israel Medina",
+  "license": "ISC",
+  "description": ""
 }
