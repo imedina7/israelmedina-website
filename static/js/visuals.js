@@ -6,12 +6,12 @@ function moveObj (obj_id) {
   var window_w = window.innerWidth;
   var obj_x_pos = Number.parseInt(el.style.right.replace("px",""));
   if (Math.abs(obj_x_pos) <= window_w) {
-    obj_x_pos = obj_x_pos + 300;
+    obj_x_pos = obj_x_pos + 200;
     el.style.right = obj_x_pos + "px";
-    setTimeout('moveObj("'+obj_id+'")',30);
+    setTimeout('moveObj("'+obj_id+'")',20);
   } else {
     document.body.removeChild(el);
-    clearTimeout('moveObj("'+obj_id+'")',30);
+    clearTimeout('moveObj("'+obj_id+'")',20);
   }
 
 }
@@ -26,7 +26,7 @@ function swipeBackground(){
   el.style.height = window_h+"px";
   el.style.right = "-"+window_w+"px";
   document.body.appendChild(el);
-  navigator.vibrate(500);
+  navigator.vibrate(150);
   moveObj(obj_id);
 }
 
