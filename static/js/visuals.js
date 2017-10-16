@@ -5,8 +5,8 @@ function moveObj (obj_id) {
   var el = document.getElementById(obj_id);
   var window_w = window.innerWidth;
   var obj_x_pos = Number.parseInt(el.style.right.replace("px",""));
-  if (Math.abs(obj_x_pos) <= window_w) {
-    obj_x_pos = obj_x_pos + 200;
+  if (Math.abs(obj_x_pos) <= (window_w * 2)) {
+    obj_x_pos = obj_x_pos + 100;
     el.style.right = obj_x_pos + "px";
     setTimeout('moveObj("'+obj_id+'")',20);
   } else {
@@ -22,7 +22,7 @@ function swipeBackground(){
   var obj_id = 'swipping-'+getRandomInt(0,5000);
   el.setAttribute('class','swipping');
   el.setAttribute('id',obj_id);
-  el.style.width = window_w+"px";
+  el.style.width = (window_w*2)+"px";
   el.style.height = window_h+"px";
   el.style.right = "-"+window_w+"px";
   document.body.appendChild(el);
