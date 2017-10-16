@@ -4,16 +4,11 @@ function getRandomInt(min, max) {
 function moveObj (obj_id) {
   var el = document.getElementById(obj_id);
   var window_w = window.innerWidth;
-  var obj_x_pos = Number.parseInt(el.style.right.replace("px",""));
-  if (Math.abs(obj_x_pos) <= (window_w * 2)) {
-    obj_x_pos = obj_x_pos + 100;
-    el.style.right = obj_x_pos + "px";
-    setTimeout('moveObj("'+obj_id+'")',20);
-  } else {
+  // var obj_x_pos = Number.parseInt(el.style.right.replace("px",""));
+  el.style.right = window_w*3+"px";
+  setTimeout(function(){
     document.body.removeChild(el);
-    clearTimeout('moveObj("'+obj_id+'")',20);
-  }
-
+  },500);
 }
 function swipeBackground(){
   var el = document.createElement('div');
