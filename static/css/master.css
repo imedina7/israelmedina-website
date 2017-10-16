@@ -9,9 +9,20 @@ body {
   overflow: hidden;
 }
 h1 {
+  position: relative;
   font-size: 2em;
   color: #FFFFFF;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+}
+h1::after {
+  position: absolute;
+  content: 'Developer';
+  font-size: 0.3em;
+  font-weight: normal;
+  font-style: italic;
+  opacity: 0.4;
+  right:  0;
+  bottom: -15px;
 }
 a {
   color: #00B7FF;
