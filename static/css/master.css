@@ -1,10 +1,33 @@
 body {
-  font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-size: 30px;
   text-align: center;
-  background-color: #CCCCCC;
-  color: #444444;
+  background-color: #35393C;
+  color: #5DA399;
 }
-
+h1 {
+  color: #FFFFFF;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
 a {
   color: #00B7FF;
+}
+p {
+  font-family: 'Raleway', sans-serif;
+}
+div.general {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 200px rgba(0,0,0,0.4) inset;
+}
+div.item {
+  padding: 5px 20px;
+  /*background: #272f2f;*/
 }
