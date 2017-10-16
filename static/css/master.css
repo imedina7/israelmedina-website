@@ -1,9 +1,12 @@
 body {
+  padding: 0;
+  margin: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   text-align: center;
   background-color: #35393C;
   color: #5DA399;
+  overflow: hidden;
 }
 h1 {
   font-size: 2em;
@@ -62,7 +65,12 @@ div.item {
   padding: 5px 20px;
   /*background: #272f2f;*/
 }
-
+div.swipping {
+  position: relative;
+  z-index: -5000;
+  background: rgba(255,255,255, 0.1);
+  transform: skewX(-45deg);
+}
 /*==========  Mobile First Method  ==========*/
 
 /* Custom, iPhone Retina */

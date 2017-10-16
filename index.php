@@ -20,5 +20,7 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="/static/js/visuals.js">
+    </script>
     </body>
 </html>
