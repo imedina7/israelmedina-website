@@ -21,7 +21,7 @@ function swipeBackground(){
   el.style.height = window_h+"px";
   el.style.right = "-"+window_w+"px";
   document.body.appendChild(el);
-  navigator.vibrate(150);
+  navigator.vibrate(50);
   moveObj(obj_id);
 }
 
