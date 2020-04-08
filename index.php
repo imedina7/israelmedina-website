@@ -16,7 +16,8 @@
           <a href="https://www.facebook.com/themarciano"><i class="fa fa-facebook" aria-hidden="true"><span>Facebook</span></i></a>
           <a href="https://www.instagram.com/isra2dave"><i class="fa fa-instagram" aria-hidden="true"><span>Instagram</span></i></a>
           <a href="https://www.linkedin.com/in/imedina7"><i class="fa fa-linkedin" aria-hidden="true"><span>LinkedIn</span></i></a>
-          <a href="https://www.soundcloud.com/imedina7"><i class="fa fa-soundcloud" aria-hidden="true"><span>LinkedIn</span></i></a>
+          <a href="https://www.soundcloud.com/imedina7"><i class="fa fa-soundcloud" aria-hidden="true"><span>Soundcloud</span></i></a>
+          <a href="https://www.youtube.com/DaveMedinaTV"><i class="fa fa-youtube" aria-hidden="true"><span>YouTube</span></i></a>
         </div>
       </div>
     </div>
