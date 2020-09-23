@@ -91,7 +91,7 @@ div.general {
   box-shadow: 0 0 200px rgba(0,0,0,0.4) inset;
 }
 div.item {
-  padding: 5px 20px;
+  padding: 0.05em 0.2em;
   /*background: #272f2f;*/
 }
 div.swipping {
@@ -107,7 +107,7 @@ div.swipping {
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {
   body {
-    font-size: 20px;
+    font-size: 23px;
   }
   div.social-wrap {padding: 0 0;}
 }
@@ -115,14 +115,14 @@ div.swipping {
 /* Extra Small Devices, Phones */
 @media only screen and (min-width : 480px) {
   body {
-    font-size: 23px;
+    font-size: 25px;
   }
 }
 
 /* Small Devices, Tablets 30*/
 @media only screen and (min-width : 768px) {
   body {
-    font-size: 26px;
+    font-size: 28px;
   }
   div.social-wrap {padding: 0 0;}
 }
@@ -130,7 +130,7 @@ div.swipping {
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
   body {
-    font-size: 30px;
+    font-size: 32px;
   }
   div.social-wrap {padding: 0 5px;}
 }
@@ -138,6 +138,6 @@ div.swipping {
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
   body {
-    font-size: 30px;
+    font-size: 37px;
   }
 }
