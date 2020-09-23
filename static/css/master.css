@@ -46,8 +46,9 @@ div.social-wrap {
   color: #222222;
 }
 .davemedinatv svg {
-  margin-top: 5px;
-  width: 27pt;
+  margin-top: 10px;
+  padding: 0 0.1em;
+  width: 1.1em;
   fill: #222222;
   filter: drop-shadow( 0 2px 1px rgba(0, 0, 0, 0.5) );
   transition: all 0.4s;
