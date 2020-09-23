@@ -45,6 +45,16 @@ div.social-wrap {
   transition: all 0.4s;
   color: #222222;
 }
+.davemedinatv svg {
+  margin-top: 5px;
+  width: 27pt;
+  fill: #222222;
+  filter: drop-shadow( 0 2px 1px rgba(0, 0, 0, 0.5) );
+  transition: all 0.4s;
+}
+.davemedinatv svg:hover {
+  fill: #FFFFFF;
+}
 .social-wrap i:hover {
   opacity: 1;
 }
