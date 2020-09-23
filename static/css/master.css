@@ -4,7 +4,7 @@ body {
   font-family: 'Roboto Slab', sans-serif;
   font-size: 16px;
   text-align: center;
-  background-color: #c4cdd4;
+  background-color: #ced4da;
   background-image: url('/static/img/noisy_bg.png');
   color: #333333;
   overflow: hidden;
@@ -61,19 +61,19 @@ div.social-wrap {
   opacity: 1;
 }
 .fa-facebook:hover {
-  color: #2c3f69;
+  color: #4267B2;
 }
 .fa-instagram:hover {
-  color: #5a1f80;
+  color: #833AB4;
 }
 .fa-soundcloud:hover {
-  color: #c2711b;
+  color: #FE5000;
 }
 .fa-github:hover {
   color: #292727;
 }
 .fa-linkedin:hover {
-  color: #3d78af
+  color: #2867B2
 }
 /*  This could be styled somehow (maybe tooltip-like)  */
 i span {
