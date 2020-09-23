@@ -43,24 +43,10 @@ div.social-wrap {
   opacity: 0.6;
   text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
   transition: all 0.4s;
+  color: #222222;
 }
 .social-wrap i:hover {
   opacity: 1;
-}
-.fa-facebook {
-  color: #2f394e;
-}
-.fa-instagram {
-  color: #492d5a;
-}
-.fa-soundcloud {
-  color: #996833;
-}
-.fa-github {
-  color: #333333;
-}
-.fa-linkedin {
-  color: #377892
 }
 .fa-facebook:hover {
   color: #2c3f69;
