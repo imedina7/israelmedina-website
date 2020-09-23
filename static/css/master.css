@@ -36,7 +36,7 @@ div.social-wrap {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 5px;
+  padding: 0;
   justify-content: space-between;
 }
 .social-wrap i {
@@ -109,7 +109,7 @@ div.swipping {
   body {
     font-size: 20px;
   }
-  div.social-wrap {padding: 0 8px;}
+  div.social-wrap {padding: 0 0;}
 }
 
 /* Extra Small Devices, Phones */
@@ -124,7 +124,7 @@ div.swipping {
   body {
     font-size: 26px;
   }
-  div.social-wrap {padding: 0 15px;}
+  div.social-wrap {padding: 0 0;}
 }
 
 /* Medium Devices, Desktops */
@@ -132,7 +132,7 @@ div.swipping {
   body {
     font-size: 30px;
   }
-  div.social-wrap {padding: 0 30px;}
+  div.social-wrap {padding: 0 5px;}
 }
 
 /* Large Devices, Wide Screens */
