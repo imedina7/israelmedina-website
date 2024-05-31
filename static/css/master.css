@@ -1,4 +1,5 @@
 body {
+  user-select: none;
   padding: 0;
   margin: 0;
   font-family: 'Roboto Slab', sans-serif;
@@ -17,7 +18,7 @@ h1 {
 }
 h1::after {
   position: absolute;
-  content: 'Developer';
+  content: 'Senior Fullstack Developer';
   font-size: 0.3em;
   font-weight: normal;
   font-style: italic;
@@ -95,15 +96,6 @@ div.item {
   padding: 0.05em 0.2em;
   /*background: #272f2f;*/
 }
-div.swipping {
-  position: relative;
-  z-index: -5000;
-  background: rgba(255,255,255, 0.1);
-  /*transform: ;*/
-  transform: translateZ(0) skewX(-45deg) ;
-  transition: linear all .4s;
-}
-/*==========  Mobile First Method  ==========*/
 
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {
