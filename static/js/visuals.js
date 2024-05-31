@@ -1,33 +1,74 @@
 function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function moveObj (obj_id) {
-  var el = document.getElementById(obj_id);
-  var window_w = window.innerWidth;
-  // var obj_x_pos = Number.parseInt(el.style.right.replace("px",""));
-  el.style.right = window_w*3+"px";
-  setTimeout(function(){
-    document.body.removeChild(el);
-  },500);
+
+function getViewportDimensions() {
+  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+  return [vw,vh];
 }
-function swipeBackground(){
-  var el = document.createElement('div');
-  var window_w = window.innerWidth;
-  var window_h = window.innerHeight;
-  var obj_id = 'swipping-'+getRandomInt(0,5000);
-  el.setAttribute('class','swipping');
-  el.setAttribute('id',obj_id);
-  el.style.width = (window_w*2)+"px";
-  el.style.height = window_h+"px";
-  el.style.right = "-"+window_w+"px";
-  document.body.appendChild(el);
-  navigator.vibrate(50);
-  moveObj(obj_id);
+
+function getCanvasContext() {
+  const canvasId = 'game-canvas';
+  const canvas = document.getElementById(canvasId);
+  if(canvas !== null) {
+    return canvas.getContext('2d');
+  }
+  const [viewportWidth, viewportHeight] = getViewportDimensions();
+  const canvasElem = document.createElement('canvas');
+  canvasElem.setAttribute('width', viewportWidth);
+  canvasElem.setAttribute('height', viewportHeight);
+  canvasElem.setAttribute('id', canvasId);
+  document.body.appendChild(canvasElem);
+
+  const context = canvasElem.getContext('2d');
+  return context;
+}
+
+function runGame(context){
+  const [vw, vh] = getViewportDimensions();
+  const gameState = {
+    paddlePosition: 0,
+    paddleWidth: 140,
+    paddleHeight: 25,
+    ballPosition: [vw / 2, vh / 2],
+    ballVelocity: [0.2, -0.2],
+    bricks: []
+  }
+
+  function updatePaddle({ clientX }) {
+    gameState.paddlePosition = clientX - gameState.paddleWidth / 2;
+  }
+
+  function drawPaddle(ctx) {
+    const [viewportWidth, viewportHeight] = getViewportDimensions();
+    ctx.clearRect(0,viewportHeight - gameState.paddleHeight , viewportWidth, gameState.paddleHeight);
+    ctx.fillRect(gameState.paddlePosition, viewportHeight - gameState.paddleHeight / 2, gameState.paddleWidth, gameState.paddleHeight);
+  }
+
+  function drawBall(ctx) {
+    const ballRadius = 10;
+    ctx.beginPath();
+    ctx.arc(...gameState.ballPosition, ballRadius, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+
+  document.addEventListener('mousemove', updatePaddle);
+
+  function gameLoop(){
+    drawPaddle(context);
+    drawBall(context);
+    requestAnimationFrame(gameLoop);
+  }
+  gameLoop();
 }
 
 (function (){
-  console.log("App loaded");
 
-  document.body.addEventListener('click', swipeBackground);
+  function loadGame() {
+    const context = getCanvasContext();
+    runGame(context);
+  }
 
+  document.body.addEventListener('dblclick', loadGame);
 })();
