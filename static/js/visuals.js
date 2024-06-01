@@ -1,3 +1,5 @@
+const PADDLE_MARGIN = 7;
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -6,7 +8,7 @@ function normalize([x, y]) {
   return [x / det, y / det];
 }
 function getRandomVel() {
-  return normalize([Math.random() * 2 - 1, Math.random() * 2 - 1]);
+  return normalize([Math.random() * 2 - 1, Math.min(0.1, Math.random()) * 2 - 1]);
 }
 
 function dot([x1, y1], [x2, y2]){
@@ -68,7 +70,7 @@ function runGame(context){
     const [viewportWidth] = getViewportDimensions();
     const halfPaddle = gameState.paddleWidth / 2;
     const newPos = targetX - halfPaddle;
-    gameState.paddlePosition = Math.max(0, Math.min(newPos, viewportWidth - gameState.paddleWidth));
+    gameState.paddlePosition = Math.max(0, Math.min(newPos, viewportWidth - gameState.paddleWidth) + PADDLE_MARGIN);
   }
 
   function drawPaddle(ctx) {
@@ -80,8 +82,8 @@ function runGame(context){
     const [x, y] = gameState.ballPosition;
     const [vx, vy] = gameState.ballVelocity;
     const {paddleHeight, ballRadius, ballSpeed, paddlePosition, paddleWidth} = gameState;
-    const paddleStart = paddlePosition;
-    const paddleEnd = paddlePosition + paddleWidth;
+    const paddleStart = paddlePosition - PADDLE_MARGIN;
+    const paddleEnd = paddlePosition + paddleWidth + PADDLE_MARGIN;
     const newXPos = x+vx * ballSpeed;
     const newYPos = y+vy * ballSpeed;
     if((newXPos + ballRadius > paddleEnd || newXPos - ballRadius < paddleStart) && newYPos + ballRadius > vh - paddleHeight) {
@@ -107,25 +109,34 @@ function runGame(context){
     ctx.fill();
   }
 
+
   document.addEventListener('mousemove', updatePaddle);
   document.addEventListener('touchmove', updatePaddle);
 
   let frameReq;
   function gameLoop(){
+    let isRunning = true;
     clearCanvas(context);
-    updateBall(() => {
-      cancelAnimationFrame(frameReq);
-      console.log("Game Over");
-      gameState.lockPaddle = true;
-      setTimeout(() => {
-        gameState.ballPosition = [vw / 2, vh / 2];
-        gameState.ballVelocity = []
-        gameState.lockPaddle = false;
-      }, 2000)
-    });
+    context.fillStyle = "black";
     drawPaddle(context);
     drawBall(context);
-    frameReq = requestAnimationFrame(gameLoop);
+    updateBall(() => {
+      const [viewportWidth, viewportHeight] = getViewportDimensions();
+      context.font = "16px serif";
+      context.fillStyle = "white";
+      context.fillText("Game Over", gameState.paddlePosition + 3, viewportHeight - 2);
+      console.log("Game Over");
+      cancelAnimationFrame(frameReq);
+      isRunning = false;
+      setTimeout(() => {
+        runGame(context)
+      }, 2000)
+      return;
+    });
+
+    if(isRunning){
+      frameReq = requestAnimationFrame(gameLoop);
+    }
   }
   gameLoop();
 }
@@ -154,9 +165,14 @@ function runGame(context){
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       document.body.addEventListener('touchend', detectDoubleTapClosure(), { passive: false });
   }
+  let gameStarted = false;
+
   function loadGame() {
-    const context = getCanvasContext();
-    runGame(context);
+    if(!gameStarted){
+      const context = getCanvasContext();
+      runGame(context);
+      gameStarted = true;
+    }
   }
 
   document.body.addEventListener('dblclick', loadGame);
