@@ -47,17 +47,6 @@ div.social-wrap {
   transition: all 0.4s;
   color: #222222;
 }
-.davemedinatv svg {
-  margin-top: 10px;
-  padding: 0 0.1em;
-  width: 1.1em;
-  fill: #222222;
-  filter: drop-shadow( 0 2px 1px rgba(0, 0, 0, 0.5) );
-  transition: all 0.4s;
-}
-.davemedinatv svg:hover {
-  fill: #FFFFFF;
-}
 .social-wrap i:hover {
   opacity: 1;
 }
@@ -80,7 +69,7 @@ div.social-wrap {
 i span {
   display: none;
 }
-div.general {
+div.container {
   position: absolute;
   bottom: 0;
   top: 0;
@@ -90,11 +79,10 @@ div.general {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 200px rgba(0,0,0,0.4) inset;
+  box-shadow: 0 0 200px rgba(0,0,0,0.7) inset;
 }
 div.item {
   padding: 0.05em 0.2em;
-  /*background: #272f2f;*/
 }
 
 /* Custom, iPhone Retina */
@@ -133,4 +121,8 @@ div.item {
   body {
     font-size: 37px;
   }
+}
+
+.disabled {
+  opacity: 0.2;
 }

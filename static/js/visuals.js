@@ -1,5 +1,22 @@
-const PADDLE_MARGIN = 7;
+const DRAW_BOUNDING_BOXES = false;
 
+function findBoundingBoxes() {
+  const titleElements = Array.from(document.getElementsByTagName('h1')[0].childNodes);
+  const iconElements = Array.from(document.getElementsByTagName('i'));
+  const boundingBoxes = [...titleElements, ...iconElements].filter(elem => elem.nodeName !== "#text").map(elem => {
+    const {offsetParent, offsetWidth, offsetHeight, offsetTop, offsetLeft} = elem;
+    const x = offsetParent.offsetLeft + offsetLeft;
+    const y = offsetParent.offsetTop + offsetTop;
+    const width = offsetWidth;
+    const height = offsetHeight;
+    const touch = () => {
+      elem.classList.add('disabled');
+    }
+    return { x, y, width, height, touch };
+  });
+
+  return boundingBoxes;
+}
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -8,7 +25,10 @@ function normalize([x, y]) {
   return [x / det, y / det];
 }
 function getRandomVel() {
-  return normalize([Math.random() * 2 - 1, Math.min(0.1, Math.random()) * 2 - 1]);
+  return normalize([
+    Math.min(0.1, Math.random()) * 2 - 1,
+    Math.random() * 2 - 1
+  ]);
 }
 
 function dot([x1, y1], [x2, y2]){
@@ -23,8 +43,12 @@ function reflect(vector1, vector2) {
 }
 
 function getViewportDimensions() {
-  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-  const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+  const { clientWidth = 0, clientHeight = 0 } = document.documentElement;
+  const { innerWidth = 0, innerHeight = 0 } = window;
+
+  const vw = Math.max(clientWidth, innerWidth);
+  const vh = Math.max(clientHeight, innerHeight);
+
   return [vw,vh];
 }
 
@@ -54,10 +78,11 @@ function runGame(context){
     lockPaddle: false,
     ballPosition: [vw / 2, vh / 2],
     ballVelocity: getRandomVel(),
-    ballSpeed: 3.2,
+    ballSpeed: 5.4,
     ballRadius: 10,
     bricks: []
   }
+
 
   function clearCanvas(ctx) {
     ctx.clearRect(0,0, vw, vh);
@@ -70,23 +95,41 @@ function runGame(context){
     const [viewportWidth] = getViewportDimensions();
     const halfPaddle = gameState.paddleWidth / 2;
     const newPos = targetX - halfPaddle;
-    gameState.paddlePosition = Math.max(0, Math.min(newPos, viewportWidth - gameState.paddleWidth) + PADDLE_MARGIN);
+    gameState.paddlePosition =
+      Math.max(0, Math.min(newPos, viewportWidth - gameState.paddleWidth));
   }
 
   function drawPaddle(ctx) {
     const [viewportWidth, viewportHeight] = getViewportDimensions();
-    ctx.fillRect(gameState.paddlePosition, viewportHeight - gameState.paddleHeight, gameState.paddleWidth, gameState.paddleHeight);
+    ctx.fillRect(
+      gameState.paddlePosition,
+      viewportHeight - gameState.paddleHeight,
+      gameState.paddleWidth,
+      gameState.paddleHeight
+    );
   }
 
   function updateBall(gameover){
-    const [x, y] = gameState.ballPosition;
-    const [vx, vy] = gameState.ballVelocity;
-    const {paddleHeight, ballRadius, ballSpeed, paddlePosition, paddleWidth} = gameState;
-    const paddleStart = paddlePosition - PADDLE_MARGIN;
-    const paddleEnd = paddlePosition + paddleWidth + PADDLE_MARGIN;
-    const newXPos = x+vx * ballSpeed;
-    const newYPos = y+vy * ballSpeed;
-    if((newXPos + ballRadius > paddleEnd || newXPos - ballRadius < paddleStart) && newYPos + ballRadius > vh - paddleHeight) {
+    const { paddleHeight,
+            ballRadius,
+            ballSpeed,
+            paddlePosition,
+            paddleWidth,
+            ballPosition,
+            ballVelocity } = gameState;
+
+    const [x, y] = ballPosition;
+    const [vx, vy] = ballVelocity;
+
+    const paddleStart = paddlePosition;
+    const paddleEnd = paddlePosition + paddleWidth;
+
+    const newXPos = x + vx * ballSpeed;
+    const newYPos = y + vy * ballSpeed;
+
+    if((newXPos > paddleEnd ||
+        newXPos < paddleStart)
+      && newYPos + ballRadius > vh - paddleHeight) {
       gameover();
       return;
     }
@@ -109,6 +152,19 @@ function runGame(context){
     ctx.fill();
   }
 
+  function initBricks() {
+    gameState.bricks = findBoundingBoxes();
+  }
+
+  function updateBricks() {
+    const {ballPosition, bricks} = gameState;
+    gameState.bricks = bricks.map(brick => {
+      if (ballPosition[0] > brick.x && ballPosition[0] < brick.x + brick.width && ballPosition[1] > brick.y && ballPosition[1] < brick.y + brick.height){
+        brick.touch();
+      }
+      return brick;
+    })
+  }
 
   document.addEventListener('mousemove', updatePaddle);
   document.addEventListener('touchmove', updatePaddle);
@@ -117,15 +173,24 @@ function runGame(context){
   function gameLoop(){
     let isRunning = true;
     clearCanvas(context);
+
+    if(DRAW_BOUNDING_BOXES) {
+      context.fillStyle = "rgba(0,0,0,0.5)";
+      gameState.bricks.forEach(brick => {
+        context.strokeRect(brick.x, brick.y, brick.width, brick.height);
+      })
+    }
+
     context.fillStyle = "black";
     drawPaddle(context);
     drawBall(context);
+    updateBricks();
     updateBall(() => {
       const [viewportWidth, viewportHeight] = getViewportDimensions();
       context.font = "16px serif";
       context.fillStyle = "white";
       context.fillText("Game Over", gameState.paddlePosition + 3, viewportHeight - 2);
-      console.log("Game Over");
+
       cancelAnimationFrame(frameReq);
       isRunning = false;
       setTimeout(() => {
@@ -138,6 +203,7 @@ function runGame(context){
       frameReq = requestAnimationFrame(gameLoop);
     }
   }
+  initBricks();
   gameLoop();
 }
 
