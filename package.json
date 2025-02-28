@@ -1,0 +1,36 @@
+{
+  "name": "israelmedina-website",
+  "version": "1.0.0",
+  "description": "A simple website for a developer",
+  "scripts": {
+    "dev": "vite serve",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:unit": "vitest --environment jsdom --root src/",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "lint": "eslint . --ext .js,.cjs,.mjs,.ts,.cts,.mts --fix --ignore-path .gitignore"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imedina7/israelmedina-website.git"
+  },
+  "author": "Israel Medina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imedina7/israelmedina-website/issues"
+  },
+  "homepage": "https://github.com/imedina7/israelmedina-website#readme",
+  "devDependencies": {
+    "@types/core-js": "^2.5.8",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^22.13.5",
+    "dotenv": "^16.4.7",
+    "jsdom": "^26.0.0",
+    "prettier": "^3.5.2",
+    "typescript": "^5.4.5",
+    "vite": "^6.2.0",
+    "vitest": "^3.0.7"
+  },
+  "type": "module"
+}

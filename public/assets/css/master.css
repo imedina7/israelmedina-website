@@ -6,7 +6,7 @@ body {
   font-size: 16px;
   text-align: center;
   background-color: #ced4da;
-  background-image: url('/static/img/noisy_bg.png');
+  background-image: url('/assets/img/noisy_bg.png');
   color: #333333;
   overflow: hidden;
 }
