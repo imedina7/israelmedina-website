@@ -102,10 +102,10 @@ function runGame(context: CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, vw, vh);
   }
 
-  function updatePaddle({ clientX, touchList }: any) {
+  function updatePaddle({ clientX, touches }: any) {
     if (gameState.lockPaddle) return;
     let targetX = clientX;
-    if (!clientX) targetX = touchList.item(0).clientX;
+    if (isMobileBrowser()) targetX = touches.item(0).clientX;
     const [viewportWidth] = getViewportDimensions();
     const halfPaddle = gameState.paddleWidth / 2;
     const newPos = targetX - halfPaddle;
